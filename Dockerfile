@@ -81,7 +81,7 @@ ENV HEATCLINIC_OPTS \
   -Dproperty-shared-override=/usr/share/tomcat/heatclinic/heatclinic.properties
 COPY heatclinic-createdb.properties /usr/share/tomcat/heatclinic/heatclinic.properties
 RUN /etc/init.d/mysql start \
-  && CATALINA_OPTS=$HEATCLINIC_OPTS /usr/share/tomcat/bin/catalina.sh start \
+  && CATALINA_OPTS=$HEATCLINIC_OPTS; /usr/share/tomcat/bin/catalina.sh start \
   && until [ -e /usr/share/tomcat/logs/catalina.out ] && grep 'Server startup' /usr/share/tomcat/logs/catalina.out; \
        do tail /usr/share/tomcat/logs/catalina.out && sleep 1; done \
   && /usr/share/tomcat/bin/catalina.sh stop \
